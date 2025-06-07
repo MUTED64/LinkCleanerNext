@@ -31,9 +31,9 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
-        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/LinkCleanerNext/favicon.ico" />
+        <link rel="shortcut icon" href="/LinkCleanerNext/favicon.ico" />
+        <link rel="apple-touch-icon" href="/LinkCleanerNext/favicon.ico" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

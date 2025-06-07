@@ -5,18 +5,18 @@ export default function manifest(): MetadataRoute.Manifest {
     name: '链接清洗器',
     short_name: 'LinkCleaner',
     description: '链接清洗器',
-    start_url: '/',
+    start_url: '/LinkCleanerNext/',
     display: 'standalone',
     background_color: '#ffffff',
     theme_color: '#000000',
     icons: [
       {
-        src: '/web-app-menifest-192x192.png',
+        src: '/LinkCleanerNext/web-app-menifest-192x192.png',
         sizes: '192x192',
         type: 'image/png',
       },
       {
-        src: '/web-app-menifest-512x512.png',
+        src: '/LinkCleanerNext/web-app-menifest-512x512.png',
         sizes: '512x512',
         type: 'image/png',
       },
