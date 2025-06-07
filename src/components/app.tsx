@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { ModeToggle } from "@/components/ui/theme-toggle";
 import { toast } from "sonner";
 import { Copy, Clipboard, Link, Loader2, CheckCircle } from "lucide-react";
 
@@ -116,6 +117,9 @@ export default function UrlCleanerApp() {
   };
   return (
     <div className="min-h-screen bg-gradient-to-br p-8">
+      <div className="flex justify-end">
+        <ModeToggle />
+      </div>
       <div className="max-w-3xl mx-auto space-y-6">
         {/* 标题区域 */}
         <div className="text-center space-y-2 py-8">
@@ -228,7 +232,7 @@ export default function UrlCleanerApp() {
           {/* 上边距4下边距8 */}
           <CardContent className="space-y-3 pt-4 pb-8">
             <div className="flex items-start gap-3">
-              <CheckCircle className="h-5 w-5 text-gray-800 mt-0.5 flex-shrink-0" />
+              <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="font-medium">自动识别链接</p>
                 <p className="text-sm text-muted-foreground">
@@ -237,7 +241,7 @@ export default function UrlCleanerApp() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="h-5 w-5 text-gray-800 mt-0.5 flex-shrink-0" />
+              <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="font-medium">批量处理</p>
                 <p className="text-sm text-muted-foreground">
@@ -246,7 +250,7 @@ export default function UrlCleanerApp() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="h-5 w-5 text-gray-800 mt-0.5 flex-shrink-0" />
+              <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="font-medium">自动复制</p>
                 <p className="text-sm text-muted-foreground">
@@ -255,7 +259,7 @@ export default function UrlCleanerApp() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle className="h-5 w-5 text-gray-800 mt-0.5 flex-shrink-0" />
+              <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="font-medium">保留格式</p>
                 <p className="text-sm text-muted-foreground">

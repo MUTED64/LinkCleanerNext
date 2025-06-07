@@ -1,4 +1,4 @@
-import UrlCleanerApp from '@/components/UrlCleanerApp';
+import UrlCleanerApp from '@/components/app';
 import { Toaster } from '@/components/ui/sonner';
 
 export default function Home() {
