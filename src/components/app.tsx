@@ -21,13 +21,18 @@ export default function UrlCleanerApp() {
   const [outputText, setOutputText] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // 处理粘贴按钮点击
+  // 处理粘贴并处理按钮点击
   const handlePaste = async () => {
     try {
       const clipboardText = await readFromClipboard();
       if (clipboardText) {
         setInputText(clipboardText);
         toast.success("已从剪贴板粘贴内容");
+        
+        // 自动开始处理
+        setTimeout(() => {
+          processUrls(clipboardText);
+        }, 100);
       } else {
         toast.error("剪贴板为空或无法访问");
       }
@@ -47,8 +52,9 @@ export default function UrlCleanerApp() {
   };
 
   // 处理URL处理逻辑
-  const processUrls = async () => {
-    if (!inputText.trim()) {
+  const processUrls = async (textToProcess?: string) => {
+    const text = textToProcess || inputText;
+    if (!text.trim()) {
       toast.error("请输入要处理的内容");
       return;
     }
@@ -57,11 +63,11 @@ export default function UrlCleanerApp() {
 
     try {
       // 提取所有URL
-      const urlMatches = extractUrls(inputText);
+      const urlMatches = extractUrls(text);
 
       if (urlMatches.length === 0) {
         toast.warning("未找到有效的URL链接");
-        setOutputText(inputText);
+        setOutputText(text);
         setIsProcessing(false);
         return;
       }
@@ -79,7 +85,7 @@ export default function UrlCleanerApp() {
       }));
 
       // 替换文本中的URL
-      const processedText = replaceUrlsInText(inputText, urlReplacements);
+      const processedText = replaceUrlsInText(text, urlReplacements);
       setOutputText(processedText);
 
       // 统计处理结果
@@ -147,7 +153,7 @@ export default function UrlCleanerApp() {
                   className="flex items-center gap-1"
                 >
                   <Clipboard className="h-4 w-4" />
-                  粘贴
+                  粘贴并处理
                 </Button>
                 <Button
                   variant="outline"
@@ -175,7 +181,7 @@ export default function UrlCleanerApp() {
         {/* 处理按钮 */}
         <div className="flex justify-center">
           <Button
-            onClick={processUrls}
+            onClick={() => processUrls()}
             disabled={isProcessing || !inputText.trim()}
             size="lg"
             className="px-8"
