@@ -450,6 +450,11 @@ const rules = [
         ])),
     },
     {
+        name: 'iesdouyin link',
+        match: matchFactory.hostpath('www.iesdouyin.com', null),
+        clean: cleanFactory.whitelist(new Set()),
+    },
+    {
         name: 'Douban link',
         match: matchFactory.hostpath('www.douban.com', '/link2/'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
