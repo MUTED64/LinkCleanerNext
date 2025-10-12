@@ -2,6 +2,16 @@
 
 import { useEffect } from 'react';
 
+// 性能相关类型定义
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+}
+
+interface LayoutShiftEntry extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
 export function PerformanceMonitor() {
   useEffect(() => {
     // 性能监控
@@ -49,8 +59,9 @@ export function PerformanceMonitor() {
             // First Input Delay (FID)
             const fidObserver = new PerformanceObserver((list) => {
               const entries = list.getEntries();
-              entries.forEach((entry: any) => {
-                console.log('[Performance] FID:', entry.processingStart - entry.startTime);
+              entries.forEach((entry) => {
+                const fidEntry = entry as PerformanceEventTiming;
+                console.log('[Performance] FID:', fidEntry.processingStart - fidEntry.startTime);
               });
             });
             fidObserver.observe({ entryTypes: ['first-input'] });
@@ -59,14 +70,15 @@ export function PerformanceMonitor() {
             let clsScore = 0;
             const clsObserver = new PerformanceObserver((list) => {
               for (const entry of list.getEntries()) {
-                if (!(entry as any).hadRecentInput) {
-                  clsScore += (entry as any).value;
+                const clsEntry = entry as LayoutShiftEntry;
+                if (!clsEntry.hadRecentInput) {
+                  clsScore += clsEntry.value;
                   console.log('[Performance] CLS:', clsScore);
                 }
               }
             });
             clsObserver.observe({ entryTypes: ['layout-shift'] });
-          } catch (e) {
+          } catch {
             // Performance Observer 不支持
             console.warn('[Performance] PerformanceObserver not fully supported');
           }
@@ -85,7 +97,7 @@ export function PerformanceMonitor() {
       
       try {
         resourceObserver.observe({ entryTypes: ['resource'] });
-      } catch (e) {
+      } catch {
         // 不支持
       }
 
@@ -97,7 +109,7 @@ export function PerformanceMonitor() {
           }
         });
         longTaskObserver.observe({ entryTypes: ['longtask'] });
-      } catch (e) {
+      } catch {
         // 不支持 longtask
       }
     }

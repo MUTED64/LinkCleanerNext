@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       { url: "/web-app-manifest-192x192.png", sizes: "192x192" },
     ],
   },
-  manifest: "/manifest.webmanifest",
+  manifest: "/manifest.json",
   keywords: ["URL", "链接清洗", "短链接", "隐私保护", "跟踪参数清除", "Link Cleaner"],
   authors: [{ name: "LinkCleaner" }],
   creator: "LinkCleaner",

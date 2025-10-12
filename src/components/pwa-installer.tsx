@@ -3,6 +3,12 @@
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 
+// PWA 相关类型定义
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
+
 export function PWAInstaller() {
   useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
@@ -64,11 +70,11 @@ export function PWAInstaller() {
 
   // 监听安装提示
   useEffect(() => {
-    let deferredPrompt: any = null;
+    let deferredPrompt: BeforeInstallPromptEvent | null = null;
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      deferredPrompt = e;
+      deferredPrompt = e as BeforeInstallPromptEvent;
       
       // 显示安装提示
       toast.info('添加到主屏幕', {
