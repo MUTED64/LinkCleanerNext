@@ -1,16 +1,15 @@
-// URL相关的工具函数
+// URL 正则表达式 - 提取到模块级别，避免每次调用重新创建
+const URL_REGEX = /https?:\/\/[^\s<>"{}|\\^`[\]]+/gi;
 
 /**
  * 从文本中提取所有URL
  * 支持http、https协议的URL
  */
 export function extractUrls(text: string): Array<{ url: string; start: number; end: number }> {
-  // 匹配URL的正则表达式
-  const urlRegex = /https?:\/\/[^\s<>"{}|\\^`[\]]+/gi;
   const urls = [];
   let match;
 
-  while ((match = urlRegex.exec(text)) !== null) {
+  while ((match = URL_REGEX.exec(text)) !== null) {
     urls.push({
       url: match[0],
       start: match.index,
